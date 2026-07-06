@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>CrocodileXGames - Elite Gaming Gear & Top-Ups</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary": "#d3fbff",
+                        "on-background": "#e5e2e1",
+                        "primary-container": "#c3f400",
+                        "outline": "#8e9379",
+                        "secondary-container": "#00eefc",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container": "#201f1f",
+                        "on-primary": "#283500",
+                        "neon-green": "#CCFF00",
+                        "surface-container-highest": "#353534",
+                        "secondary-fixed": "#7df4ff",
+                        "on-primary-container": "#556d00",
+                        "primary-fixed": "#c3f400",
+                        "on-secondary-fixed-variant": "#004f54",
+                        "surface-bright": "#3a3939",
+                        "on-secondary-container": "#00686f",
+                        "on-surface-variant": "#c4c9ac",
+                        "on-tertiary-fixed-variant": "#7000a8",
+                        "outline-variant": "#444933",
+                        "error": "#ffb4ab",
+                        "on-surface": "#e5e2e1",
+                        "surface-dim": "#131313",
+                        "on-tertiary": "#4e0078",
+                        "error-container": "#93000a",
+                        "on-secondary-fixed": "#002022",
+                        "on-tertiary-container": "#9b00e8",
+                        "secondary-fixed-dim": "#00dbe9",
+                        "background": "#131313",
+                        "electric-purple": "#B026FF",
+                        "primary": "#ffffff",
+                        "tertiary-fixed-dim": "#e5b5ff",
+                        "surface-variant": "#353534",
+                        "tertiary-container": "#f4d9ff",
+                        "on-tertiary-fixed": "#30004b",
+                        "primary-fixed-dim": "#abd600",
+                        "surface-tint": "#abd600",
+                        "on-error": "#690005",
+                        "deep-obsidian": "#0D0D0D",
+                        "surface": "#131313",
+                        "on-primary-fixed-variant": "#3c4d00",
+                        "glass-surface": "rgba(255, 255, 255, 0.05)",
+                        "inverse-primary": "#506600",
+                        "on-primary-fixed": "#161e00",
+                        "tertiary": "#ffffff",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#00363a",
+                        "tertiary-fixed": "#f4d9ff",
+                        "inverse-on-surface": "#313030",
+                        "inverse-surface": "#e5e2e1",
+                        "cyber-cyan": "#00F0FF",
+                        "surface-container-high": "#2a2a2a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "64px"
+                    },
+                    fontFamily: {
+                        "body-lg": ["Be Vietnam Pro"],
+                        "headline-lg": ["Space Grotesk"],
+                        "headline-xl": ["Space Grotesk"],
+                        "body-md": ["Be Vietnam Pro"],
+                        "price-display": ["Space Grotesk"],
+                        "label-caps": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Space Grotesk"]
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        body {
+            background-color: #0D0D0D;
+            color: #e5e2e1;
+            -webkit-font-smoothing: antialiased;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-primary {
+            background-color: #CCFF00;
+            color: black;
+            box-shadow: 0 0 0 rgba(204, 255, 0, 0);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 15px #CCFF00;
+            transform: translateY(-2px);
+        }
+
+        .glow-text-cyan {
+            text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <div id="root"></div>
+
+    <!-- React and Router libraries -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/history@5/umd/history.development.js"></script>
+    <script src="https://unpkg.com/react-router@6.3.0/umd/react-router.development.js"></script>
+    <script src="https://unpkg.com/react-router-dom@6.3.0/umd/react-router-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { createRoot } = ReactDOM;
+        const { MemoryRouter, Routes, Route, Link, useNavigate, useLocation } = ReactRouterDOM;
+
+        // --- Mock Data ---
+        const PRODUCTS = [
+            { id: 'fc-coins', name: 'FC 24 Coins', type: 'Currency', price: 4.99, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBlj6a4WbbkCNE7BdiVHJtdHDmioa1RPbSCminlUGyYZzvbQCMRDtjSE5Xd5ERaWX_cs0DEfGDPGJCQ-Po_EfJT0v9nJjpH8-I6tFaYgjSc6dxH32wqCLV09rdx8H1zHBUzNCPSHWe76A2u5NTqhdsamenQOfx29-3zT8ejHQKxBxSIL-33vJ-RxseCbiidFIt-7BbQUWz081Xa8o2GGOXJ7S1CtR_o79JbJraDwm2rDKibCa699nsxJw' },
+            { id: 'neon-keyboard', name: 'Neon Strike Pro Keyboard', type: 'Hardware', price: 149.99, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBVpJjoipz3BKkreQRFKORUyI9KzqFvO2xRVbEkaxC-spxCzVrQUjLNLO3jLBsElQRH8FDnKkX__iAo4UEb9M8Wua9ajSahBjVsn2M3Xj-jJi9W31wpZHIPdLKcv0Bq8KTV7t0z1pMCw19HTaBp_3OnBrpahoDkojKtkZCNwZNvGGd7MFHrDIapUQFsi_-mVRGwAfU9AuKdeX7b0DhTH-QhDPikZlU88wNccTDz0hJGeYJZ0k5ZqMv1QQ' },
+            { id: 'digital-key', name: 'Velocity Override X', type: 'Digital Key', price: 59.99, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuBjQm-aI-wKPj4skWTmAlMQZwagg-w_49y2vWsOY7lvLf4uCOBvvFSkso_UfACRDpUQ1L4fWlKg75fLhAQ6HYkd0ZMoyEloJPl2_XznRzVqyRjIendSHZonyM5aDcuMlvdltL11l6wmYtUJdhMgPTJgXd8XZw-W2eZlFBwilG_W1SsGGOD-aOOxWqcE8ZW2SLFMC8Om28vliqITAStLOd_yUvp1AgrxGO_JPBupjDZt2lOSz2zTf5QlLw' },
+            { id: 'apex-coins', name: '500 Apex Coins', type: 'Currency', price: 4.99, image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDbfPFM0s3WUSeOSyLwngtZ-7jMaaisu32Y6uPR1vHkboVMayvwC0yXC-DHtCCHCGWDnrjXBn-zPy135-a99RPX2k9Wl68k5DRaKqTer_gIz3cik-JVjfqPJxFaoaVKNDGGbIyjKOFbMUap5n4a6E12KIPeAux4LEzs-KuRvz7DdmLcKKkd3uZkURADfxnqb8NKMA_8HuzNrhTcBd8zbrcYr55njN1-29CcuFgGZiY-DrtOl123SUR53A' }
+        ];
+
+        // --- Shared Components ---
+
+        const Nav = () => {
+            const navigate = useNavigate();
+            const location = useLocation();
+            
+            const isActive = (path) => location.pathname === path;
+
+            return (
+                <nav className="bg-glass-surface backdrop-blur-xl border-b border-white/10 shadow-[0_0_20px_rgba(204,255,0,0.15)] fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile md:px-margin-desktop h-20 transition-all duration-300">
+                    <div className="flex items-center gap-base">
+                        <Link to="/" className="font-headline-lg text-neon-green font-bold tracking-tighter">CrocodileXGames</Link>
+                    </div>
+                    <div className="hidden md:flex items-center gap-gutter">
+                        <Link to="/" className={`font-label-caps text-sm ${isActive('/') ? 'text-neon-green border-b-2 border-neon-green' : 'text-on-background/70 hover:text-neon-green'} pb-1`}>Home</Link>
+                        <Link to="/store" className={`font-label-caps text-sm ${isActive('/store') ? 'text-neon-green border-b-2 border-neon-green' : 'text-on-background/70 hover:text-neon-green'} pb-1`}>Store</Link>
+                        <Link to="/news" className={`font-label-caps text-sm ${isActive('/news') ? 'text-neon-green border-b-2 border-neon-green' : 'text-on-background/70 hover:text-neon-green'} pb-1`}>News</Link>
+                        <Link to="/support" className={`font-label-caps text-sm ${isActive('/support') ? 'text-neon-green border-b-2 border-neon-green' : 'text-on-background/70 hover:text-neon-green'} pb-1`}>Support</Link>
+                        <Link to="/about" className={`font-label-caps text-sm ${isActive('/about') ? 'text-neon-green border-b-2 border-neon-green' : 'text-on-background/70 hover:text-neon-green'} pb-1`}>About</Link>
+                    </div>
+                    <div className="flex items-center gap-base">
+                        <button className="hidden md:block font-label-caps text-label-caps text-on-background border border-outline rounded px-2 py-1 hover:border-neon-green hover:text-neon-green">AR/EN</button>
+                        <Link to="/cart" className="text-on-background hover:text-neon-green flex items-center p-2 rounded hover:bg-white/5">
+                            <span className="material-symbols-outlined">shopping_cart</span>
+                            <span className="ml-1 font-label-caps text-label-caps hidden md:inline-block">Cart</span>
+                        </Link>
+                        <Link to="/profile" className="text-on-background hover:text-neon-green p-2">
+                            <span className="material-symbols-outlined">person</span>
+                        </Link>
+                    </div>
+                </nav>
+            );
+        };
+
+        const Footer = () => (
+            <footer className="w-full bg-surface-container-low border-t border-white/10 pt-16 pb-8 px-margin-mobile md:px-margin-desktop mt-auto">
+                <div className="max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-12 text-center md:text-left">
+                    <div className="flex flex-col gap-4">
+                        <span className="font-headline-lg text-neon-green font-bold tracking-tighter text-xl">CrocodileXGames</span>
+                        <p className="font-body-md text-sm text-on-surface-variant">Elite gaming gear and instant top-ups for the apex predator. Dominate the game with premium digital assets.</p>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <h4 className="font-headline-lg text-lg text-primary">Arsenal</h4>
+                        <Link to="/store" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">FC 24 Coins</Link>
+                        <Link to="/store" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">Premium Keys</Link>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <h4 className="font-headline-lg text-lg text-primary">Support Base</h4>
+                        <Link to="/support" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">Transmission FAQ</Link>
+                        <Link to="/support" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">Contact Command</Link>
+                    </div>
+                    <div className="flex flex-col gap-4">
+                        <h4 className="font-headline-lg text-lg text-primary">Directives</h4>
+                        <Link to="/about" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">Terms of Engagement</Link>
+                        <Link to="/about" className="font-body-md text-sm text-on-surface-variant hover:text-neon-green">Privacy Shield</Link>
+                    </div>
+                </div>
+                <div className="max-w-container-max mx-auto pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div className="flex flex-col gap-2 text-center md:text-left">
+                        <p className="font-body-md text-sm text-on-surface-variant">© 2026 CXG MEDIA LTD. All rights reserved.</p>
+                        <p className="font-body-md text-xs text-on-surface-variant/70">
+                            CXG MEDIA LTD<br />
+                            3rd Floor, 86-90 Paul Street, London, England, United Kingdom, EC2A 4NE
+                        </p>
+                    </div>
+                </div>
+            </footer>
+        );
+
+        // --- Pages ---
+
+        const HomePage = () => {
+            return (
+                <div className="pt-20">
+                    <section className="relative w-full h-[819px] min-h-[600px] flex items-center justify-center overflow-hidden px-margin-mobile md:px-margin-desktop py-12">
+                        <div className="absolute inset-0 z-0">
+                            <img alt="Hero" className="w-full h-full object-cover opacity-40" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2YO7neM4cXHdVkSc3tDhq_KM6xUdPQ9csjTYgKx8BeiBfYaMWbxY9yf3iMmW_BnpsCMF5gqus83c_qBtrbZsNOHPpBHEwANionkeWw3E4rb0kB7QDXtSIrXntbfgl6q9CKfuxx9qq79NbXyhlBlf-EQ1Uj1_DletD7_te3YvGKrmUtTC4FRtvGtUmb7zhIp1wXKYFqTnAkqZp9pS2C67BRz7zlE2vSh3d0BByeZSyvhr7DB8ql7KmTYv5ONtAO6yteKE"/>
+                            <div className="absolute inset-0 bg-gradient-to-t from-deep-obsidian via-deep-obsidian/50 to-transparent"></div>
+                        </div>
+                        <div className="relative z-10 w-full max-w-container-max mx-auto flex flex-col items-center md:items-start text-center md:text-left gap-8">
+                            <div className="glass-card p-6 md:p-10 rounded-xl max-w-2xl backdrop-blur-md border-l-4 border-neon-green">
+                                <h1 className="font-headline-xl text-3xl md:text-headline-xl text-primary mb-2 tracking-tight">DOMINATE THE GAME.</h1>
+                                <h2 className="font-headline-lg text-2xl md:text-headline-lg text-cyber-cyan glow-text-cyan mb-4">PREMIUM GEAR & INSTANT TOP-UPS.</h2>
+                                <p className="font-body-lg text-on-surface-variant mb-8 max-w-lg">Unleash the apex predator within. Elite digital assets, game keys, and currency delivered with razor-sharp precision.</p>
+                                <Link to="/store" className="btn-primary inline-flex items-center justify-center px-8 py-4 rounded-lg font-label-caps font-bold uppercase tracking-widest">
+                                    Shop Now <span className="material-symbols-outlined ml-2 text-sm">bolt</span>
+                                </Link>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section className="w-full px-margin-mobile md:px-margin-desktop py-24 max-w-container-max mx-auto">
+                        <div className="flex items-center justify-between mb-12 border-b border-white/10 pb-4">
+                            <h2 className="font-headline-lg text-primary flex items-center gap-3">
+                                <span className="material-symbols-outlined text-neon-green">star</span> Featured Arsenal
+                            </h2>
+                            <Link to="/store" className="font-label-caps text-cyber-cyan hover:text-neon-green">View All</Link>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                            {PRODUCTS.slice(0, 3).map(p => (
+                                <div key={p.id} className="glass-card rounded-xl p-6 relative overflow-hidden group flex flex-col h-full min-h-[320px]">
+                                    <div className="mb-4">
+                                        <span className="inline-block px-3 py-1 rounded-full border border-electric-purple/50 text-electric-purple font-label-caps text-[10px] uppercase">{p.type}</span>
+                                    </div>
+                                    <div className="flex-grow flex flex-col justify-center items-center py-6">
+                                        <img className="w-24 h-24 object-contain mb-4" src={p.image} />
+                                        <h3 className="font-headline-lg text-2xl text-primary text-center mb-1 group-hover:text-neon-green">{p.name}</h3>
+                                    </div>
+                                    <div className="mt-auto pt-4 border-t border-white/10 flex items-center justify-between">
+                                        <span className="font-price-display text-cyber-cyan">${p.price}</span>
+                                        <Link to={`/product/${p.id}`} className="w-10 h-10 rounded-lg bg-surface-container hover:bg-neon-green hover:text-black flex items-center justify-center">
+                                            <span className="material-symbols-outlined">visibility</span>
+                                        </Link>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+                </div>
+            );
+        };
+
+        const StorePage = () => {
+            return (
+                <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full">
+                    <section className="flex flex-col md:flex-row justify-between items-end gap-6 border-b border-white/5 pb-8 mb-12">
+                        <div>
+                            <h1 className="font-headline-xl text-primary mb-2">DIGITAL ARSENAL</h1>
+                            <p className="font-body-md text-on-surface-variant">Equip yourself with premium currency, keys, and elite accounts.</p>
+                        </div>
+                        <div className="flex flex-wrap gap-3">
+                            <button className="px-5 py-2 rounded-full border border-cyber-cyan text-cyber-cyan font-label-caps text-[10px]">ALL ITEMS</button>
+                            <button className="px-5 py-2 rounded-full border border-white/10 text-on-surface-variant font-label-caps text-[10px] hover:text-primary transition-all">CURRENCY</button>
+                            <button className="px-5 py-2 rounded-full border border-white/10 text-on-surface-variant font-label-caps text-[10px] hover:text-primary transition-all">HARDWARE</button>
+                        </div>
+                    </section>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                        {PRODUCTS.map(p => (
+                            <Link to={`/product/${p.id}`} key={p.id} className="glass-card rounded-xl overflow-hidden group flex flex-col hover:border-cyber-cyan/50 transition-all duration-300">
+                                <div className="h-48 bg-surface-container relative">
+                                    <img className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" src={p.image} />
+                                </div>
+                                <div className="p-5 flex flex-col flex-grow">
+                                    <span className="text-on-surface-variant font-label-caps text-[10px] mb-1">{p.type}</span>
+                                    <h3 className="font-body-lg text-primary font-bold mb-4">{p.name}</h3>
+                                    <div className="mt-auto flex items-center justify-between">
+                                        <div className="font-price-display text-neon-green">${p.price}</div>
+                                        <span className="material-symbols-outlined text-on-surface-variant group-hover:text-neon-green">add_shopping_cart</span>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
+                </div>
+            );
+        };
+
+        const ProductPage = () => {
+            return (
+                <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <div className="md:col-span-7">
+                        <div className="glass-card rounded-xl aspect-square flex items-center justify-center p-8 group">
+                            <img className="w-full h-full object-contain drop-shadow-[0_0_30px_rgba(0,240,255,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlj6a4WbbkCNE7BdiVHJtdHDmioa1RPbSCminlUGyYZzvbQCMRDtjSE5Xd5ERaWX_cs0DEfGDPGJCQ-Po_EfJT0v9nJjpH8-I6tFaYgjSc6dxH32wqCLV09rdx8H1zHBUzNCPSHWe76A2u5NTqhdsamenQOfx29-3zT8ejHQKxBxSIL-33vJ-RxseCbiidFIt-7BbQUWz081Xa8o2GGOXJ7S1CtR_o79JbJraDwm2rDKibCa699nsxJw" />
+                        </div>
+                    </div>
+                    <div className="md:col-span-5 flex flex-col">
+                        <div className="mb-4 flex items-center gap-3">
+                            <span className="text-neon-green font-label-caps text-xs">IN STOCK | INSTANT DELIVERY</span>
+                        </div>
+                        <h1 className="font-headline-xl text-white mb-2">FC 24 Coins</h1>
+                        <h2 className="font-headline-lg text-cyber-cyan mb-8">1M Pack</h2>
+                        <div className="glass-card p-6 rounded-xl mb-8 border-l-4 border-neon-green">
+                            <span className="font-label-caps text-xs text-on-surface-variant block mb-1">Current Price</span>
+                            <div className="text-4xl font-bold text-white">$45.99</div>
+                        </div>
+                        <p className="font-body-lg text-on-surface-variant mb-8">Dominate the pitch with a massive injection of resources. This 1 Million Coin Pack provides the capital needed to assemble your ultimate dream team.</p>
+                        <button className="btn-primary h-14 rounded-lg uppercase font-bold tracking-widest flex items-center justify-center gap-3">
+                            <span className="material-symbols-outlined">shopping_cart</span> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            );
+        };
+
+        const CartPage = () => {
+            return (
+                <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <div className="md:col-span-8 flex flex-col gap-6">
+                        <h1 className="font-headline-xl text-primary glow-text-cyan border-b border-white/10 pb-4">Your Cart</h1>
+                        {[PRODUCTS[1], PRODUCTS[2]].map(item => (
+                            <div key={item.id} className="glass-card rounded-xl p-4 flex flex-col sm:flex-row gap-4 items-center">
+                                <img className="w-24 h-24 object-cover rounded" src={item.image} />
+                                <div className="flex-grow flex flex-col">
+                                    <div className="flex justify-between items-start">
+                                        <h2 className="font-headline-lg text-xl text-primary">{item.name}</h2>
+                                        <div className="font-price-display text-neon-green">${item.price}</div>
+                                    </div>
+                                    <div className="flex justify-between items-center mt-4">
+                                        <div className="flex items-center gap-2 bg-surface-container rounded p-1">
+                                            <button className="p-1"><span className="material-symbols-outlined text-sm">remove</span></button>
+                                            <span className="font-label-caps w-6 text-center">1</span>
+                                            <button className="p-1"><span className="material-symbols-outlined text-sm">add</span></button>
+                                        </div>
+                                        <button className="text-error font-label-caps text-[10px] flex items-center gap-1">
+                                            <span className="material-symbols-outlined text-sm">delete</span> Remove
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <div className="md:col-span-4">
+                        <aside className="glass-card rounded-xl p-6 sticky top-32 flex flex-col gap-6 border-t-2 border-cyber-cyan">
+                            <h3 className="font-headline-lg text-xl text-primary border-b border-white/10 pb-4">Summary</h3>
+                            <div className="flex flex-col gap-3 text-on-surface-variant">
+                                <div className="flex justify-between"><span>Subtotal</span><span>$209.98</span></div>
+                                <div className="flex justify-between text-neon-green text-xl font-bold mt-2 pt-2 border-t border-white/10"><span>Total</span><span>$209.98</span></div>
+                            </div>
+                            <Link to="/checkout" className="btn-primary w-full py-4 rounded-lg font-bold flex justify-center items-center gap-2">CHECKOUT <span className="material-symbols-outlined">arrow_forward</span></Link>
+                        </aside>
+                    </div>
+                </div>
+            );
+        };
+
+        const CheckoutPage = () => (
+            <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+                <h1 className="font-headline-xl text-primary mb-12">SECURE CHECKOUT</h1>
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div className="lg:col-span-8 flex flex-col gap-8">
+                        <section className="glass-card p-8 rounded-xl">
+                            <h2 className="font-headline-lg text-primary mb-8 border-b border-white/10 pb-4">Delivery Intel</h2>
+                            <div className="space-y-6">
+                                <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="Email Address" type="email" />
+                                <div className="grid grid-cols-2 gap-6">
+                                    <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="First Name" />
+                                    <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="Last Name" />
+                                </div>
+                            </div>
+                        </section>
+                        <section className="glass-card p-8 rounded-xl">
+                            <h2 className="font-headline-lg text-primary mb-8 border-b border-white/10 pb-4">Payment Protocols</h2>
+                            <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary mb-6" placeholder="Card Number" />
+                            <div className="grid grid-cols-2 gap-6">
+                                <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="MM/YY" />
+                                <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="CVC" />
+                            </div>
+                        </section>
+                    </div>
+                    <div className="lg:col-span-4">
+                        <div className="glass-card p-8 rounded-xl sticky top-32">
+                            <h2 className="font-headline-lg text-xl text-primary mb-6">Review</h2>
+                            <button className="btn-primary w-full py-4 font-bold flex items-center justify-center gap-2">AUTHORIZE <span className="material-symbols-outlined">bolt</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const NewsPage = () => (
+            <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+                <h1 className="font-headline-xl text-primary mb-12">Latest Transmissions</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {[1, 2, 3].map(i => (
+                        <div key={i} className="glass-card rounded-xl overflow-hidden group">
+                            <div className="h-48 relative overflow-hidden">
+                                <img className="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjC3oYY0e1xgTQD__IK-YTaQlPBrUhQXBghVrRkJFLUuso8x5gaBOnC7Y_cfw3RudU6zIbbkKJhOic8m6zTE18jZSpN_NW2rmu7HkQfSHfbglElyKWuN_E4TrdY3VgFY41m_Ew3IV7Q-wqA63PxL8302RLfnHu95MQqkt9QjhV8cbhjRBpHqIbwYVJZo5YQ-5uW6mB8uaRHMVRFeZHbx8rL6VIEd_ZW4ZDTEOcbbZvstdC57RybS0IXA" />
+                            </div>
+                            <div className="p-6">
+                                <span className="text-electric-purple font-label-caps text-[10px]">PATCH NOTES</span>
+                                <h2 className="font-headline-lg text-xl text-white mt-2 mb-4">COMBAT PROTOCOL OVERHAUL</h2>
+                                <p className="text-on-surface-variant text-sm mb-4">Significant changes to close-quarters engagement systems are now live across all sectors.</p>
+                                <button className="text-neon-green font-label-caps flex items-center gap-2">READ MORE <span className="material-symbols-outlined text-sm">arrow_forward</span></button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        );
+
+        const SupportPage = () => (
+            <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto text-center">
+                <h1 className="font-headline-xl text-white mb-4">COMMAND <span className="text-neon-green">CENTER</span></h1>
+                <p className="font-body-lg text-on-surface-variant mb-12">Transmission issues? Send your query to our support operatives.</p>
+                <form className="glass-card p-8 md:p-12 rounded-xl text-left space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="Name" />
+                        <input className="w-full bg-[#050505] border border-white/10 p-4 text-primary" placeholder="Email" />
+                    </div>
+                    <select className="w-full bg-[#050505] border border-white/10 p-4 text-primary">
+                        <option>Technical Support</option>
+                        <option>Billing Issue</option>
+                        <option>Custom Request</option>
+                    </select>
+                    <textarea className="w-full bg-[#050505] border border-white/10 p-4 text-primary min-h-[150px]" placeholder="Your Message"></textarea>
+                    <button className="btn-primary w-full py-4 font-bold flex items-center justify-center gap-2">TRANSMIT <span className="material-symbols-outlined">send</span></button>
+                </form>
+            </div>
+        );
+
+        const AboutPage = () => (
+            <div className="pt-24 pb-24">
+                <section className="relative w-full h-[530px] flex items-end p-margin-mobile mb-12">
+                    <div className="absolute inset-0 z-0 bg-cover bg-center" style={{backgroundImage: "url('https://lh3.googleusercontent.com/aida-public/AB6AXuCpwCE07hg_9rrYMQMSp0Dr9aSyEEQiEfGUfSlqO7A8PMCg9KO5wRBR38cHgQTYDT94DGs4LxxI6YG5VAHS--4_S9Y5fTFWR2DDIC20th14-yu87l5QxP_wANaa9OIlVSfqJCY4FbBU3TV_nIBRGDNi3YHX6sIOcz1wxTX5kcIXH5R_jEfDyW6727FlTsOwAaCojBnQGSpvW5SsosdfVB4MkEaJG-ZTFq05X_lw7ysCCLPkIHcaV8XJ6A')"}}>
+                        <div className="absolute inset-0 bg-gradient-to-t from-deep-obsidian via-deep-obsidian/60 to-transparent"></div>
+                    </div>
+                    <div className="relative z-10 w-full max-w-container-max mx-auto">
+                        <h1 className="font-headline-xl text-neon-green neon-glow uppercase leading-none mb-4">ENTER THE SWAMP</h1>
+                    </div>
+                </section>
+                <div className="max-w-4xl mx-auto px-margin-mobile space-y-12">
+                    <div className="glass-card p-8 rounded-xl border-l-4 border-neon-green">
+                        <h2 className="font-label-caps text-cyber-cyan mb-4 uppercase tracking-widest">Directive Alpha</h2>
+                        <p className="font-body-lg text-primary">We forge reality for the elite. CrocodileX isn't just hardware; it's an apex predator in a digital ecosystem. Engineered for absolute dominance, our rigs combine brutal computational power with surgical precision aesthetics.</p>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const ProfilePage = () => (
+            <div className="pt-24 pb-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <div className="lg:col-span-4 flex flex-col gap-8">
+                        <div className="glass-card p-8 rounded-xl flex flex-col items-center text-center">
+                            <div className="w-24 h-24 rounded-full border-2 border-cyber-cyan p-1 mb-4">
+                                <img className="w-full h-full rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz780ab9K8DeG6s0uPhuRj78JZv-siWkN8a_x_UJNB_Y_yo_kCGbapflSA4OANTaEU0NOgo02aT4k9KHRwLcpK50xBR1l2MNzZJ8Rtr8_UhYsHt87z-4Tv4h3ti7fU7Qq4wbi2SfATxPqRCfPV4VS53RJBYODXxxCZHxUJJDQvKxovLkGP-abjbbZ7iS2i0Ttt798Hn6iTFFAjIQ23asblr9z25rlll4SnW8QgjY61zr7BA__aPuN20g" />
+                            </div>
+                            <h2 className="font-headline-lg text-white">GHOST_PROTO</h2>
+                            <p className="text-cyber-cyan font-label-caps text-xs">RANK: PREDATOR V</p>
+                        </div>
+                        <div className="glass-card p-8 rounded-xl">
+                            <h3 className="font-headline-lg text-xl text-white mb-6">Digital Wallet</h3>
+                            <div className="text-4xl font-bold text-white mb-2">500 <span className="text-xs text-on-surface-variant font-label-caps">OMEGA CREDITS</span></div>
+                            <button className="btn-primary w-full py-2 mt-4 text-xs font-bold rounded">ADD FUNDS</button>
+                        </div>
+                    </div>
+                    <div className="lg:col-span-8">
+                        <div className="glass-card p-8 rounded-xl min-h-full">
+                            <h2 className="font-headline-lg text-white mb-8">Transmission Logs</h2>
+                            <div className="space-y-4">
+                                <div className="p-4 bg-white/5 border border-white/5 rounded flex justify-between items-center">
+                                    <span className="font-mono text-sm">TRX-8892-ALPHA</span>
+                                    <span className="text-neon-green text-xs border border-neon-green/30 px-2 py-1 rounded">COMPLETED</span>
+                                    <span className="font-price-display">$49.99</span>
+                                </div>
+                                <div className="p-4 bg-white/5 border border-white/5 rounded flex justify-between items-center opacity-70">
+                                    <span className="font-mono text-sm">TRX-8102-GAMMA</span>
+                                    <span className="text-error text-xs border border-error/30 px-2 py-1 rounded">FAILED</span>
+                                    <span className="font-price-display">$89.99</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        // --- Main App ---
+
+        const App = () => {
+            return (
+                <MemoryRouter>
+                    <div className="flex flex-col min-h-screen bg-deep-obsidian">
+                        <Nav />
+                        <main className="flex-grow">
+                            <Routes>
+                                <Route path="/" element={<HomePage />} />
+                                <Route path="/store" element={<StorePage />} />
+                                <Route path="/product/:id" element={<ProductPage />} />
+                                <Route path="/cart" element={<CartPage />} />
+                                <Route path="/checkout" element={<CheckoutPage />} />
+                                <Route path="/news" element={<NewsPage />} />
+                                <Route path="/support" element={<SupportPage />} />
+                                <Route path="/about" element={<AboutPage />} />
+                                <Route path="/profile" element={<ProfilePage />} />
+                            </Routes>
+                        </main>
+                        <Footer />
+                    </div>
+                </MemoryRouter>
+            );
+        };
+
+        const container = document.getElementById('root');
+        const root = createRoot(container);
+        root.render(<App />);
+    </script>
+</body>
+</html>
